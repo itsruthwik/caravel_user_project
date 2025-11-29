@@ -7,53 +7,50 @@
     "PNR_SDC_FILE": "dir::signoff.sdc",
     
     "//": "Hardening strategy variables (this is for 1-Macro-First Hardening). Visit https://docs.google.com/document/d/1pf-wbpgjeNEM-1TcvX2OJTkHjqH_C9p-LURCASS0Zo8 for more info",
-    "SYNTH_ELABORATE_ONLY": true,
-    "RUN_POST_GPL_DESIGN_REPAIR": false,
-    "RUN_POST_CTS_RESIZER_TIMING": false,
-    "DESIGN_REPAIR_BUFFER_INPUT_PORTS": false,
-    "FP_PDN_ENABLE_RAILS": false,
-    "RUN_ANTENNA_REPAIR": false,
-    "RUN_FILL_INSERTION": false,
-    "RUN_TAP_ENDCAP_INSERTION": false,
-    "RUN_CTS": false,
-    "RUN_IRDROP_REPORT": false,
+    "SYNTH_ELABORATE_ONLY": false,
+    "RUN_POST_GPL_DESIGN_REPAIR": true,
+    "RUN_POST_CTS_RESIZER_TIMING": true,
+    "DESIGN_REPAIR_BUFFER_INPUT_PORTS": true,
+    "FP_PDN_ENABLE_RAILS": true,
+    "RUN_ANTENNA_REPAIR": true,
+    "RUN_FILL_INSERTION": true,
+    "RUN_TAP_ENDCAP_INSERTION": true,
+    "RUN_CTS": true,
+    "RUN_IRDROP_REPORT": true,
     "ERROR_ON_SYNTH_CHECKS": false,
 
     "//": "Macros configurations",
     "MACROS": {
-        "user_proj_example": {
+        "fpga_core": {
             "gds": [
-                "dir::../../gds/user_proj_example.gds"
+                "dir::../../gds/fpga_core.gds"
             ],
             "lef": [
-                "dir::../../lef/user_proj_example.lef"
+                "dir::../../lef/fpga_core.lef"
             ],
             "instances": {
-                "mprj": {
-                    "location": [60, 15],
+                "fpga_core_uut": {
+                    "location": [222.5, 693.75],
                     "orientation": "N"
                 }
             },
             "nl": [
-                "dir::../../verilog/gl/user_proj_example.v"
+                "dir::../../verilog/gl/fpga_core.v"
             ],
             "spef": {
                 "min_*": [
-                    "dir::../../spef/multicorner/user_proj_example.min.spef"
+                    "dir::../../spef/fpga_core.spef"
                 ],
                 "nom_*": [
-                    "dir::../../spef/multicorner/user_proj_example.nom.spef"
+                    "dir::../../spef/fpga_core.spef"
                 ],
                 "max_*": [
-                    "dir::../../spef/multicorner/user_proj_example.max.spef"
+                    "dir::../../spef/fpga_core.spef"
                 ]
-            },
-            "lib": {
-                "*": "dir::../../lib/user_proj_example.lib"
             }
         }
     },
-    "PDN_MACRO_CONNECTIONS": ["mprj vccd2 vssd2 vccd1 vssd1"],
+    "PDN_MACRO_CONNECTIONS": ["fpga_core_uut vccd2 vssd2 VPWR VGND"],
 
     "//": "PDN configurations",
     "FP_PDN_VOFFSET": 5,
